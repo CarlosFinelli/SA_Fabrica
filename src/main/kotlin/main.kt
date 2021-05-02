@@ -8,13 +8,14 @@ fun main(args: Array<String>) {
     var scan: Scanner = Scanner(System.`in`)
     var opcao = 0
     while (opcao != 3) {
+        try {
         println("Bem vindo ao sistema da nossa concessionária.")
         println("1 - Montadora")
         println("2 - Pessoas")
         println("3 - Sair do sistema.")
         print("\nPor favor, selecione uma opção: ")
         opcao = scan.nextInt()
-        when(opcao) {
+        when (opcao) {
             1 -> {
                 println("\n\n\n1 - Montar veículo")
                 println("2 - Editar veículo")
@@ -55,7 +56,7 @@ fun main(args: Array<String>) {
                             }
                             listCarros.add(veiculo)
                             continue
-                        } catch(e: IOException) {
+                        } catch (e: IOException) {
                             println("Algum erro ocorreu.")
                             e.stackTrace
                             continue
@@ -67,13 +68,15 @@ fun main(args: Array<String>) {
                             println("\n\n")
                             listCarros.forEach {
                                 if (it.exibicao == true) {
-                                    println("| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
-                                            "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |")
+                                    println(
+                                        "| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
+                                                "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |"
+                                    )
                                 }
                             }
                             print("Informe o código do veículo que deseja editar: ")
                             var codigo = scan.nextInt()
-                            var encontra = listCarros.find {item -> item.codVeiculo == codigo}
+                            var encontra = listCarros.find { item -> item.codVeiculo == codigo }
                             if (encontra != null) {
                                 println("\n\n\n1 - Modelo")
                                 println("2 - Preço")
@@ -142,13 +145,15 @@ fun main(args: Array<String>) {
                             println("\n\n")
                             listCarros.forEach {
                                 if (it.exibicao == true) {
-                                    println("| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
-                                            "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |")
+                                    println(
+                                        "| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
+                                                "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |"
+                                    )
                                 }
                             }
                             print("Informe o código do veículo que deseja remover da lista: ")
                             var codigo = scan.nextInt()
-                            var encontra = listCarros.find {item -> item.codVeiculo == codigo}
+                            var encontra = listCarros.find { item -> item.codVeiculo == codigo }
                             if (encontra != null) {
                                 listCarros.remove(encontra)
                             } else {
@@ -167,8 +172,10 @@ fun main(args: Array<String>) {
                             println("\n\n")
                             listCarros.forEach {
                                 if (it.exibicao == true) {
-                                    println("| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
-                                            "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |")
+                                    println(
+                                        "| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
+                                                "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |"
+                                    )
                                 }
                             }
                             continue
@@ -501,5 +508,10 @@ fun main(args: Array<String>) {
 
             else -> println("Opção inválida")
         }
+    } catch (e: IOException) {
+        println("\n\nAlgum erro ocorreu.")
+        e.stackTrace
+        continue
     }
+}
 }
