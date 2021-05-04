@@ -7,6 +7,7 @@ fun main(args: Array<String>) {
     val listFuncionario = mutableListOf<Funcionario>()
     val listPecas = mutableListOf<CarroParts>()
     val listManutencoes = mutableListOf<Manutencao>()
+    val listPedidos = mutableListOf<CarroProduct>()
     var scan: Scanner = Scanner(System.`in`)
     var opcao = 0
     while (opcao != 3) {
@@ -26,9 +27,11 @@ fun main(args: Array<String>) {
                     println("5 - Editar peça")
                     println("6 - Remover peça")
                     println("7 - Agendar manutenção")
-                    println("8 - Listar manutenções")
-                    println("9 - Listar veículos")
-                    println("10 - Voltar à tela principal")
+                    println("8 - Fazer pedido de fabricação")
+                    println("8 - Confirmar pedido de fabricação")
+                    println("10 - Listar manutenções")
+                    println("11 - Listar veículos")
+                    println("12 - Voltar à tela principal")
                     print("\nPor favor, selecione uma opção: ")
                     var decisao = scan.nextInt()
                     when (decisao) {
@@ -323,6 +326,75 @@ fun main(args: Array<String>) {
 
                         8 -> {
                             try {
+                                var veiculo = CarroProduct()
+                                print("\n\nInforme o modelo do carro: ")
+                                veiculo.modelo = scan.nextLine()
+                                veiculo.modelo = scan.nextLine()
+                                print("Informe o preço do veículo: ")
+                                veiculo.preco = scan.nextDouble()
+                                print("Informe a descrição do motor do veículo: ")
+                                veiculo.dscMotor = scan.nextLine()
+                                print("Informe o ano de fabricação do veículo: ")
+                                veiculo.anoDeFabricacao = scan.nextInt()
+                                print("Informe a montadora deste veículo: ")
+                                veiculo.montadora = scan.nextLine()
+                                veiculo.exibicao = true
+                                if (listPedidos.size < 1) {
+                                    veiculo.codVeiculo = 1
+                                } else {
+                                    var encontra = listCarros.last()
+                                    veiculo.codVeiculo = encontra.codVeiculo + 1
+                                }
+                                listPedidos.add(veiculo)
+                                continue
+                            } catch (e: IOException) {
+                                println("Algum erro ocorreu.")
+                                e.stackTrace
+                                continue
+                            }
+                        }
+
+                        9 -> {
+                            try {
+                                println("\n\n")
+                                listPedidos.forEach {
+                                    if (it.exibicao == true) {
+                                        println(
+                                            "| Código: ${it.codVeiculo} | Modelo: ${it.modelo} | Preço: ${it.preco} | Ano Fabricação: ${it.anoDeFabricacao} |" +
+                                                    "| Descrição do motor: ${it.dscMotor} |\n| Montadora: ${it.montadora} |"
+                                        )
+                                    }
+                                }
+                                print("Selecione o código do veículo que deseja montar: ")
+                                var pedido = scan.nextInt()
+                                var buscaPedido = listPedidos.find {item -> item.codVeiculo == pedido}
+                                var encontrou = false
+                                if (buscaPedido != null) {
+                                    listCarros.forEach {
+                                        if (it.modelo == buscaPedido.modelo) {
+                                            println("Este veículo já existe no catálogo")
+                                            listPedidos.remove(buscaPedido)
+                                            encontrou = true
+                                        }
+                                    }
+                                    if (encontrou == true) {
+                                        continue
+                                    }
+                                    listCarros.add(buscaPedido)
+                                } else {
+                                    println("Código inválido")
+                                    continue
+                                }
+                                continue
+                            } catch (e: IOException) {
+                                println("\n\nAlgum erro ocorreu.")
+                                e.stackTrace
+                                continue
+                            }
+                        }
+
+                        10 -> {
+                            try {
                                 println("\n\n")
                                 listPecas.forEach {
                                     println("| Código: ${it.codPeca} | Nome: ${it.nome} | Tipo: ${it.tipo} | Preço: ${it.preco} |")
@@ -334,7 +406,7 @@ fun main(args: Array<String>) {
                             }
                         }
 
-                        9 -> {
+                        11 -> {
                             try {
                                 println("\n\n")
                                 listCarros.forEach {
@@ -351,6 +423,10 @@ fun main(args: Array<String>) {
                                 e.stackTrace
                                 continue
                             }
+                        }
+
+                        12 -> {
+                            continue
                         }
 
                         else -> {
