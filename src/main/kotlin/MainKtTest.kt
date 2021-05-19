@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 
 internal class MainKtTest {
 
-    val calc = Calculadora()
+    private val calc = Calculadora()
 
     @Test
     fun main() {
@@ -28,5 +28,15 @@ internal class MainKtTest {
     @Test
     fun testDividir() {
         assertEquals(5.0, calc.dividir(15.0, 3.0))
+    }
+
+    @Test
+    fun testSomaError() {
+        assertEquals(20, calc.somar(14, 20))
+    }
+
+    @Test
+    fun testMultiplicarError() {
+        assertEquals(50, calc.multiplicar(20, 2))
     }
 }
