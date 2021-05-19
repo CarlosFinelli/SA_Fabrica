@@ -1,4 +1,7 @@
-class CarroProduct: CarroBuilder() {
+package SA_Fabrica_General
+
+
+class CarroProduct {
 
     var preco: Double = 0.0
     lateinit var dscMotor: String

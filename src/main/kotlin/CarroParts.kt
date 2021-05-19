@@ -1,3 +1,6 @@
+package SA_Fabrica_General
+
+
 class CarroParts {
     var preco: Double = 0.0
     lateinit var nome: String

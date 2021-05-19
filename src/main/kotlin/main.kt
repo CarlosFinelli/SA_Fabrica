@@ -1,3 +1,5 @@
+package SA_Fabrica_General
+
 import java.io.IOException
 import java.util.*
 
@@ -736,7 +738,7 @@ fun main(args: Array<String>) {
                                 }
                             }
 
-                            9 -> break
+                            9 -> continue
 
                             else -> println("Opção inválida")
                         }

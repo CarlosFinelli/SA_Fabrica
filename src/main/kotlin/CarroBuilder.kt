@@ -1,3 +1,0 @@
-abstract open class CarroBuilder {
-
-}

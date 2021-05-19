@@ -1,3 +1,5 @@
+package SA_Fabrica_General
+
 open class Pessoa {
     lateinit var telefone: String
     lateinit var cpf: String
